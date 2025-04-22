@@ -25,7 +25,7 @@ const skills = [
 export default function AboutPage() {
   return (
     <PageTransition>
-      <div className="min-h-screen pt-24 pb-16 px-6 md:px-12">
+      <div className="min-h-screen px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <ParallaxSection speed={0.1} className="mb-12">
             <AnimatedText
@@ -44,19 +44,20 @@ export default function AboutPage() {
             />
           </ParallaxSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-2">
             <ParallaxSection speed={0.15} className="space-y-6">
               <div className="relative aspect-square max-w-md mx-auto lg:mx-0 overflow-hidden rounded-lg border border-border border-glow">
                 <Image
                   src="/images/profile4.jpeg"
                   alt="Manish Maharjan"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
             </ParallaxSection>
 
-            <ParallaxSection speed={0.2} className="space-y-6">
+            <ParallaxSection speed={0.2} className="space-y-2">
               <div className="prose prose-invert max-w-none">
                 <h2 className="text-2xl font-bold mb-4">My Journey</h2>
                 <p>

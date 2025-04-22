@@ -45,7 +45,7 @@ const projects = [
 export default function WorkPage() {
   return (
     <PageTransition>
-      <div className="min-h-screen pt-24 pb-16 px-6 md:px-12">
+      <div className="min-h-screen pb-16 px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <ParallaxSection speed={0.1} className="mb-12">
             <AnimatedText

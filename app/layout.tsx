@@ -32,10 +32,8 @@ export default function RootLayout({
           <div className="relative min-h-screen overflow-hidden">
             <StarsBackground />
             <ShootingStars />
-            {/* <VideoPlayer /> */}
-            <div className="relative">
-              <Navigation />
-            </div>
+
+            <Navigation />
 
             <main className="relative z-10">{children}</main>
           </div>
