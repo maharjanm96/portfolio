@@ -2,19 +2,18 @@ import ComesInGoesOutUnderline from "@/fancy/components/text/underline-comes-in-
 import GoesOutComesInUnderline from "@/fancy/components/text/underline-goes-out-comes-in";
 import Link from "next/link";
 import React from "react";
+import ServiceSinglePage from "./service-single-page";
 
 const SticktFooter: React.FC = () => {
   return (
     <div className="w-full items-center justify-center h-full overflow-scroll">
-      {/* add relative positioning to the main conent */}
-      <div className="relative w-full h-full z-10 text-2xl md:text-7xl font-bold uppercase flex justify-center items-center bg-black text-white whitespace-pre">
-        Last Section ↓
+      <div className="relative h-full z-10 bg-black overflow-hidden">
+        <ServiceSinglePage />
       </div>
 
-      {/* Sticky footer. The only important thing here is the z-index, the sticky position and the bottom value */}
-      <div className="sticky z-0 bottom-0 left-0 w-full h-80 bg-white flex justify-center items-center">
+      <div className="sticky z-0 bottom-0 left-0 w-full h-80 bg-transparent flex justify-center items-center">
         <div className="relative overflow-hidden w-full h-full flex justify-end px-12 text-right items-start py-12">
-          <div className="flex flex-row space-x-12 sm:pace-x-16  md:space-x-24 text-sm sm:text-lg md:text-xl text-black">
+          <div className="flex flex-row space-x-12 sm:pace-x-16  md:space-x-24 text-sm sm:text-lg md:text-xl text-primary">
             <ul className="flex flex-col">
               <Link className="" href="/">
                 <ComesInGoesOutUnderline label="Home" direction="right" />
@@ -23,7 +22,10 @@ const SticktFooter: React.FC = () => {
                 <ComesInGoesOutUnderline label="About" direction="left" />
               </Link>
               <Link className="" href="/projects">
-                <ComesInGoesOutUnderline label="  Projects" direction="right" />
+                <ComesInGoesOutUnderline label="Works" direction="right" />
+              </Link>
+              <Link className="" href="/services">
+                <ComesInGoesOutUnderline label="Services" direction="left" />
               </Link>
               <Link className="" href="/contact">
                 <ComesInGoesOutUnderline label="Contact" direction="left" />
@@ -47,7 +49,7 @@ const SticktFooter: React.FC = () => {
               </Link>
             </ul>
           </div>
-          <h2 className="absolute bottom-0 left-0  translate-y-1/3 sm:text-[192px]  text-[80px] text-black">
+          <h2 className="absolute bottom-0 left-0  translate-y-1/3 sm:text-[192px]  text-[80px] text-primary">
             portfolio
           </h2>
         </div>

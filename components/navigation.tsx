@@ -58,7 +58,7 @@ const NavBar = () => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 h-[26rem] bg-primary z-50 flex flex-col justify-start pt-[4rem]"
+            className="fixed inset-0 h-[27rem] bg-primary z-50 flex flex-col justify-start pt-[3rem] md:pt-[2rem]"
           >
             <div className="flex flex-col gap-8 md:gap-14 items-start w-full lg:ml-[50rem]">
               <div className="pl-2 md:p-0">
@@ -95,7 +95,20 @@ const NavBar = () => {
                 >
                   <BoxReveal>
                     <LetterSwapForward
-                      label="Work"
+                      label="Works"
+                      reverse={true}
+                      staggerFrom={"last"}
+                    />
+                  </BoxReveal>
+                </Link>
+                <Link
+                  href="/services"
+                  className="block text-6xl font-bold text-black hover:text-stone-500"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <BoxReveal>
+                    <LetterSwapForward
+                      label="Services"
                       reverse={true}
                       staggerFrom={"last"}
                     />
@@ -116,7 +129,7 @@ const NavBar = () => {
                 </Link>
               </div>
 
-              <div className="flex gap-8 text-2xl font-bold text-black p-4 md:p-0">
+              <div className="flex gap-8 text-2xl font-bold text-black px-4 md:p-0">
                 <Link href="https://www.linkedin.com/in/manish-maharjan-4b5a761a0/">
                   <BoxReveal>
                     <ComesInGoesOutUnderline

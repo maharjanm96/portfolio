@@ -1,6 +1,7 @@
 import { Bricolage_Grotesque } from "next/font/google";
 
 import Navigation from "@/components/navigation";
+import NebulaTheme from "@/components/nebula-theme";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import type { Metadata } from "next";
@@ -32,6 +33,7 @@ export default function RootLayout({
           <div className="relative min-h-screen overflow-hidden">
             <StarsBackground />
             <ShootingStars />
+            <NebulaTheme />
 
             <Navigation />
 
