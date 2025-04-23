@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { useRef } from "react";
 import { CiMobile3 } from "react-icons/ci";
-import { Button } from "./ui/button";
+import { ShinyButton } from "./magicui/shiny-button";
 
 interface Service {
   icon: React.ReactNode;
@@ -26,14 +26,14 @@ const services = [
     icon: <Layout className="h-10 w-10" />,
     title: "Frontend Development",
     description:
-      "Creating responsive, interactive user interfaces with modern frameworks like React, Next.js, and Vue.",
+      "Creating responsive, interactive user interfaces with modern frameworks like React, Next.js, Tailwind CSS and Shadcn UI.",
     color: "from-blue-500 to-cyan-400",
   },
   {
     icon: <Database className="h-10 w-10" />,
     title: "Backend Development",
     description:
-      "Building robust server-side applications with Node.js, Express, MongoDB, and PostgreSQL.",
+      "Building robust server-side applications with Node.js, Express, MongoDB, and Prisma.",
     color: "from-purple-500 to-indigo-500",
   },
   {
@@ -144,13 +144,7 @@ const ServicesGrid = () => {
   );
 };
 
-const ServiceCard = ({
-  service,
-  index,
-}: {
-  service: Service;
-  index: number;
-}) => {
+const ServiceCard = ({ service }: { service: Service; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
@@ -161,7 +155,7 @@ const ServiceCard = ({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{
         duration: 0.7,
-        delay: 0.1 + index * 0.1,
+        delay: 0.1,
         ease: [0.215, 0.61, 0.355, 1],
       }}
       whileHover={{ y: -10 }}
@@ -181,33 +175,28 @@ const ServiceCard = ({
       </div>
 
       <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-      <p className="text-muted-foreground mb-4 flex-grow">
-        {service.description}
-      </p>
-
-      <motion.div
-        className="flex items-center text-sm font-medium text-primary group-hover:underline"
-        initial={{ x: 0 }}
-        whileHover={{ x: 5 }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      >
-        Learn more <ArrowRight className="ml-1 h-4 w-4" />
-      </motion.div>
+      <p className="text-primary mb-4 flex-grow">{service.description}</p>
     </motion.div>
   );
 };
 
 const CTASection = () => {
   return (
-    <Link href="/contact" className="flex justify-center">
-      <Button
-        className="hover:scale-x-105 transition-all duration-300 rounded-[0.3rem] cursor-pointer"
-        variant={"outline"}
-        size={"lg"}
-      >
-        Get In Touch
-        <ArrowRight className="ml-1 h-4 w-4 " />
-      </Button>
-    </Link>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.1, delay: 0.1 }}
+    >
+      <Link href="/contact" className="flex justify-center">
+        <ShinyButton className="cursor-pointer text-xl border-1 border-primary rounded-[0.3rem]">
+          <span className="flex items-center justify-center">
+            <p>Get In Touch</p>
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </span>
+        </ShinyButton>
+      </Link>
+    </motion.div>
   );
 };

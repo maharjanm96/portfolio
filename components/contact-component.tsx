@@ -163,7 +163,7 @@ const InfoSection = () => {
         variants={itemVariants}
         className="space-y-6 bg-card/20 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg"
       >
-        <h3 className="text-xl font-semibold">Connect With Me</h3>
+        <h3 className="text-xl font-semibold text-primary">Connect With Me</h3>
         <div className="flex flex-col space-y-5">
           {socialLinks.map((link, index) => (
             <motion.div

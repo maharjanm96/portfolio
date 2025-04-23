@@ -7,6 +7,7 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import type React from "react";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
@@ -38,6 +39,7 @@ export default function RootLayout({
             <Navigation />
 
             <main className="relative z-10">{children}</main>
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>

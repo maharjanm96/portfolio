@@ -139,7 +139,7 @@ const ProfileSection = () => {
           alt="Manish Maharjan"
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
           priority
         />
         <motion.div
@@ -170,7 +170,7 @@ const ContentSection = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={isJourneyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
-        className="bg-card/20 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg flex-grow relative overflow-hidden group"
+        className="bg-card/20 backdrop-blur-sm p-4 md:p-8 rounded-2xl border border-border/50 shadow-lg flex-grow relative overflow-hidden group"
       >
         {/* Subtle gradient animation on hover */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-xl -z-10" />
@@ -185,7 +185,7 @@ const ContentSection = () => {
             the digital cosmos began with a fascination for how technology can
             transform ideas into reality.
           </p>
-          <p className="leading-relaxed text-primary">
+          <span className="leading-relaxed text-primary">
             As the co-founder of{" "}
             <LinkPreview
               url="https://redrubixin.com"
@@ -201,7 +201,7 @@ const ContentSection = () => {
             I&apos;ve had the opportunity to work on various projects ranging
             from e-commerce platforms to interactive web applications, always
             striving to push the boundaries of what&apos;s possible.
-          </p>
+          </span>
           <p className="leading-relaxed text-primary">
             When I&apos;m not coding, you can find me exploring new
             technologies, contributing to open-source projects, or stargazing –
@@ -257,6 +257,7 @@ const ContentSection = () => {
           ))}
         </div>
       </motion.div> */}
+
       <TechStackMarquee />
     </div>
   );

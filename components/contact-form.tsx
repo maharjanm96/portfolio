@@ -1,272 +1,201 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+// import { PhoneInput } from "@/components/ui/phone-input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion, useInView } from "framer-motion";
-import { Send } from "lucide-react";
-import { useRef, useState } from "react";
-import { Label } from "./ui/label";
+import { contactSchema, ContactSchema } from "@/lib/contactSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { CgMail } from "react-icons/cg";
+import { toast } from "sonner";
 
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  subject?: string;
-  message?: string;
-  form?: string;
-}
-
-const ContactForm = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+export default function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const form = useForm<ContactSchema>({
+    resolver: zodResolver(contactSchema),
   });
 
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.length < 10) {
-      newErrors.message = "Message must be at least 10 characters";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
-    if (errors[id as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [id]: undefined }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setErrors({});
-
+  async function onSubmit(values: ContactSchema) {
     try {
+      setIsSubmitting(true);
+      console.log(values);
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Log form data
-      console.log("Form submitted:", formData);
-
-      setIsSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+      toast.success("Message sent successfully!", {
+        description: "Thank you for reaching out. I'll get back to you soon.",
       });
 
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 5000);
+      form.reset();
     } catch (error) {
-      console.error(error);
-      setErrors({ form: "Failed to send message. Please try again." });
+      console.error("Form submission error", error);
+      toast.error("Failed to submit the form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const formVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        delay: 0.3,
-        ease: [0.215, 0.61, 0.355, 1],
-      },
-    },
-  };
-
-  const inputVariants = {
-    focus: { scale: 1.01, boxShadow: "0 0 0 2px rgba(124, 58, 237, 0.3)" },
-  };
+  }
 
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={formVariants}
-      className="bg-card/30 backdrop-blur-sm p-8 border border-border/50 shadow-lg relative overflow-hidden rounded-2xl"
-    >
-      {/* Gradient border effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-      <motion.h2
-        className="text-2xl font-bold mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+    <Form {...form}>
+      <motion.form
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 max-w-4xl mx-auto py-10 prose prose-invert bg-transparent p-8 rounded-2xl border border-border/50 shadow-lg"
       >
-        Send Me a Message
-      </motion.h2>
-
-      {isSuccess && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-green-100 text-green-800 p-4 mb-6 rounded-[0.3rem]"
-        >
-          Message sent successfully! Thank you for reaching out.
-        </motion.div>
-      )}
-
-      {errors.form && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-red-100 text-red-800 p-4 mb-6 rounded-[0.3rem]"
-        >
-          {errors.form}
-        </motion.div>
-      )}
-
-      <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <motion.div whileFocus="focus" variants={inputVariants}>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                className={`bg-background/50 border-border/50 focus:border-primary rounded-[0.3rem] ${
-                  errors.name ? "border-red-500" : ""
-                }`}
-              />
-            </motion.div>
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-            )}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <motion.div whileFocus="focus" variants={inputVariants}>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your email"
-                className={`bg-background/50 border-border/50 focus:border-primary rounded-[0.3rem] ${
-                  errors.email ? "border-red-500" : ""
-                }`}
-              />
-            </motion.div>
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="subject">Subject</Label>
-          <motion.div whileFocus="focus" variants={inputVariants}>
-            <Input
-              id="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              placeholder="Subject"
-              className={`bg-background/50 border-border/50 focus:border-primary rounded-[0.3rem] ${
-                errors.subject ? "border-red-500" : ""
-              }`}
+        <h2 className="text-2xl font-bold mb-4 text-primary">Contact Me</h2>
+        <div className="grid grid-cols-12 gap-4">
+          <motion.div
+            className="col-span-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Your name"
+                      {...field}
+                      className="rounded-[0.3rem]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </motion.div>
-          {errors.subject && (
-            <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
-          )}
-        </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="message">Message</Label>
-          <motion.div whileFocus="focus" variants={inputVariants}>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Your message"
-              rows={6}
-              className={`bg-background/50 border-border/50 focus:border-primary resize-none rounded-[0.3rem] ${
-                errors.message ? "border-red-500" : ""
-              }`}
+          <motion.div
+            className="col-span-6"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <FormField
+              control={form.control}
+              name="contact"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-start">
+                  <FormLabel>Contact</FormLabel>
+                  <FormControl className="w-full">
+                    <Input
+                      placeholder="Your contact"
+                      {...field}
+                      className="rounded-[0.3rem]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </motion.div>
-          {errors.message && (
-            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-          )}
         </div>
 
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Subject"
+                    {...field}
+                    className="rounded-[0.3rem]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Your email"
+                    {...field}
+                    className="rounded-[0.3rem]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Your message"
+                    className="resize-none rounded-[0.3rem]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
         >
           <Button
             type="submit"
+            className="w-full rounded-[0.3rem] cursor-pointer hover:scale-105 transition-all duration-300"
             disabled={isSubmitting}
-            className="w-full gap-2 bg-primary text-black hover:bg-primary/90 rounded-[0.3rem]"
           >
-            {isSubmitting ? (
-              "Sending..."
-            ) : (
-              <>
-                <Send className="h-4 w-4" />
-                Send Message
-              </>
-            )}
+            {isSubmitting ? "Sending..." : "Send Message"}
+            <CgMail className="w-4 h-4 ml-2" />
           </Button>
         </motion.div>
-      </form>
-    </motion.div>
+      </motion.form>
+    </Form>
   );
-};
-
-export default ContactForm;
+}

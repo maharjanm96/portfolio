@@ -130,9 +130,9 @@ const TechCard = ({ img, name }: { img: string; name: string }) => {
 
 export function TechStackMarquee() {
   return (
-    <div className="relative flex h-96 w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:600px]">
+    <div className="relative flex h-96 w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:600px] bg-transparent rounded-2xl">
       <div
-        className="flex flex-row items-center gap-4"
+        className="flex flex-row items-center md:gap-4"
         style={{
           transform:
             "translateX(0px) translateY(10px) translateZ(-10px) rotateX(30deg) rotateY(-0deg) rotateZ(0deg)",
@@ -160,10 +160,10 @@ export function TechStackMarquee() {
         </Marquee>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"></div>
+      {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"></div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background"></div>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div> */}
     </div>
   );
 }

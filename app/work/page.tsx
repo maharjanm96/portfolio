@@ -57,22 +57,41 @@ const projects: Project[] = [
     githubUrl: "https://github.com/maharjanm96/Pi-Airdrop",
   },
   {
-    title: "Orbit Social",
+    title: "YatraBhojan - A Taste Of Home",
     description:
-      "Social media platform with real-time messaging and content sharing",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["Next.js", "Socket.io", "PostgreSQL", "Tailwind CSS"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
+      "A food delivery mobile app with a modern and clean UI using Flutter, and a dashboard for the admin to manage the menu and orders using Next js.",
+    image: "/projects/yatrabhojan.png",
+    tags: ["Flutter", "Next.js", "Firebase", "MongoDB", "Tailwind CSS"],
+    liveUrl:
+      "https://play.google.com/store/apps/details?id=com.yatrabhojan.food_delivery&hl=en",
+    githubUrl: "https://github.com/maharjanm96/",
   },
   {
-    title: "Nebula Notes",
+    title: "Parbat Kailash Adventures",
     description:
-      "Note-taking app with markdown support and cloud synchronization",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["React", "Redux", "Node.js", "MongoDB"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
+      "A modern travel agency website with a clean UI powered by Shadcn UI, featuring an admin dashboard to manage bookings, trek packages, and customers — backed by MongoDB.",
+    image: "/projects/parbat.png",
+    tags: ["Next.js", "MongoDB", "Tailwind CSS", "Framer Motion"],
+    liveUrl: "https://parbatkailashtrek.com/",
+    githubUrl: "https://github.com/maharjanm96/",
+  },
+  {
+    title: "Reverence",
+    description:
+      "​Reverence.ie is Ireland's central hub for death notices, memorial tributes, and funeral-related information built using Next.js, Tailwind CSS, Shadcn UI and MongoDB",
+    image: "/projects/reverence.png",
+    tags: ["Next.js", "MongoDB", "Tailwind CSS ", "Typescript", "Shadcn UI"],
+    liveUrl: "https://reverence.ie/",
+    githubUrl: "https://github.com/maharjanm96/",
+  },
+  {
+    title: "Red Rubix Innovations",
+    description:
+      "A present-day, visually engaging company website for Red Rubix Innovations — showcasing our projects, tech capabilities, and client-focused solutions. Built with a clean and modern UI. ",
+    image: "/projects/redrubix.png",
+    tags: ["Next.js", "Tailwind CSS", "MongoDB", "Framer Motion"],
+    liveUrl: "https://redrubixin.com/",
+    githubUrl: "https://github.com/maharjanm96",
   },
 ];
 
@@ -130,7 +149,7 @@ const ProjectCard = ({
         ease: [0.215, 0.61, 0.355, 1],
       }}
       whileHover={{ y: -10 }}
-      className="group relative rounded-2xl overflow-hidden border border-border/50 bg-transparent backdrop-blur-sm shadow-lg"
+      className="group relative rounded-2xl overflow-hidden border border-border/50 bg-transparent shadow-lg"
     >
       <div className="relative overflow-hidden">
         <motion.div
