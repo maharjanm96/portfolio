@@ -52,6 +52,7 @@ const projects: Project[] = [
       "NextAuth",
       "Shadcn UI",
       "Framer Motion",
+      "Educational Purpose",
     ],
     liveUrl: "https://piofficialairdrop.vercel.app/",
     githubUrl: "https://github.com/maharjanm96/Pi-Airdrop",

@@ -10,7 +10,6 @@ import {
   Lightbulb,
   Search,
   Server,
-  Shield,
   Smartphone,
 } from "lucide-react";
 import Link from "next/link";
@@ -81,13 +80,7 @@ const services = [
       "Implementing search engine optimization techniques to improve visibility and organic traffic.",
     color: "from-blue-600 to-indigo-500",
   },
-  {
-    icon: <Shield className="h-10 w-10" />,
-    title: "Web Security",
-    description:
-      "Implementing robust security measures to protect your applications and user data.",
-    color: "from-red-500 to-rose-400",
-  },
+
   {
     icon: <Lightbulb className="h-10 w-10" />,
     title: "Technical Consultation",

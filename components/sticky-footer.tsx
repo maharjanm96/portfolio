@@ -32,19 +32,40 @@ const SticktFooter: React.FC = () => {
               </Link>
             </ul>
             <ul className="flex flex-col">
-              <Link href="https://www.linkedin.com/in/manish-maharjan-4b5a761a0/">
+              <Link
+                href="https://www.linkedin.com/in/manish-maharjan-4b5a761a0/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ComesInGoesOutUnderline label="LinkedIn" direction="left" />
               </Link>
-              <Link href="https://github.com/maharjanm96">
+              <Link
+                href="https://github.com/maharjanm96"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ComesInGoesOutUnderline label="Github" direction="right" />
               </Link>
-              <Link className="" href="https://www.instagram.com/manee_mrzn/">
+              <Link
+                href="https://www.instagram.com/manee_mrzn/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ComesInGoesOutUnderline label="Instagram" direction="left" />
               </Link>
-              <Link className="" href="#">
+              <Link
+                href="https://mail.google.com/mail/u/0/#inbox?compose=new"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ComesInGoesOutUnderline label="maharjanm96@gmail.com" />
               </Link>
-              <Link className="text-red-600" href="https://redrubixin.com">
+              <Link
+                className="text-red-600"
+                href="https://redrubixin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GoesOutComesInUnderline
                   label="Red Rubix Innovations"
                   direction="left"
